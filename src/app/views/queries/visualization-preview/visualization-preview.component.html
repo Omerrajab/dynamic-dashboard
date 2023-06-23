@@ -1,0 +1,19 @@
+<div [ngSwitch]="type">
+    <div *ngSwitchCase="'barChart'">
+        <app-bar-chart></app-bar-chart>
+    </div>
+
+    <div *ngSwitchCase="'pieChart'">
+        <!-- Content for option 3 -->
+       <app-pie-chart></app-pie-chart>
+    </div>
+    <div *ngSwitchCase="'lineChart'">
+      <app-line-chart></app-line-chart>
+    </div>
+    
+    <div *ngSwitchDefault>
+        <!-- Default content if no case matches -->
+        <h1>Default Option</h1>
+        <p>No option selected.</p>
+    </div>
+</div>

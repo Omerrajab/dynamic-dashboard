@@ -1,0 +1,138 @@
+<c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-body>
+        <form cForm class="row g-3">
+          <ng-container *ngIf="!rawQuery">
+            <c-col md="3" class="float-end">
+              <select
+                cSelect
+                id="inputState"
+                class="float-end"
+                #collection
+                name="selectedcollection"
+                (change)="selectCollection(collection.value)"
+                [(ngModel)]="selectedCollection.id" 
+              >
+                <option disabled>Select Collection</option>
+                <option *ngFor="let option of collctions" [value]="option.id">
+                  {{ option.title }}
+                </option>
+              </select>
+            </c-col>
+  
+            <c-col xs="12">
+              <table [striped]="true" cTable>
+                <thead>
+                  <tr>
+                    <th scope="col">Options</th>
+                    <th scope="col">And/Or</th>
+                    <th scope="col">Field</th>
+                    <th scope="col">Operation</th>
+                    <th scope="col">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let query of queries; let i = index">
+                    <td class="pt-3">
+                      <a (click)="setQuery('remove', i)" class="mr-2">
+                        <svg
+                          cIcon
+                          name="cilX"
+                          class="text-danger m-r-1"
+                          size="lg"
+                        ></svg>
+                      </a>
+                      <a (click)="setQuery('add', i)">
+                        <svg
+                          cIcon
+                          name="cilPlus"
+                          class="text-success"
+                          size="lg"
+                        ></svg>
+                      </a>
+                      &nbsp;
+                      <input cFormCheckInput  type="checkbox"   id="checked"  name="checked+{{ i }}" [(ngModel)]="query.checked" [checked]="query.checked"/>
+                    </td>
+  
+                    <td>
+                      <select
+                        cSelect
+                        id="condition"
+                        #condition
+                        [(ngModel)]="query.condition"
+                        name="condition+{{ i }}"
+                        (change)="selectCondition(condition.value, i)"
+                        *ngIf="i > 0"
+                      >
+                        <option [value]="'AND'">And</option>
+                        <option [value]="'OR'">Or</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select
+                        cSelect
+                        #column
+                        [(ngModel)]="query.field"
+                        [name]="'column' + i"
+                        (change)="selectColumn(column.value, i)"
+                      >
+                        <option
+                          *ngFor="let option of selectedCollection.columns"
+                          [value]="option.title"
+                        >
+                          {{ option.title }}
+                        </option>
+                      </select>
+                    </td>
+                    <td>
+                      <select
+                        cSelect
+                        id="operation"
+                        [(ngModel)]="query.operation"
+                        name="operation+{{ i }}"
+                      >
+                        <option
+                          *ngFor="let option of query.operations"
+                          [value]="option"
+                        >
+                          {{ option }}
+                        </option>
+                      </select>
+                    </td>
+                    <td>
+                      <input
+                        cFormControl
+                        id="value"
+                        [(ngModel)]="query.value"
+                        name="value+{{ i }}"
+                        [disabled]="disabledOptions.includes(query.operation)"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </c-col>
+          </ng-container>
+          <textarea
+            *ngIf="preview"
+            class="form-control"
+            id="preview"
+            rows="3"
+            [(ngModel)]="preview"
+            name="preview"
+          ></textarea>
+          <c-col md="12">
+           
+            <button (click)="executeQuery()" cButton color="primary" type="reset" class="float-end ml-2 mt-2" size="sm">
+                <svg [cIcon]="icons.cilMediaPlay" size="sm" title="List Icon"></svg>
+                Execute
+              </button>
+              <button (click)="addQuery()" cButton color="secondary" type="reset" class="float-end mt-2" size="sm">
+                <svg [cIcon]="icons.cilSave" size="sm" title="List Icon"></svg>
+                Save
+              </button>
+          </c-col>
+        </form>
+      </c-card-body>
+    </c-card>
+  </c-col>

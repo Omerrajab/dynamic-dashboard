@@ -1,0 +1,126 @@
+
+  <!-- <c-row>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header ngPreserveWhitespaces>
+          <strong>App Visualization</strong>
+        </c-card-header>
+        <c-card-body>
+          <ng-container *ngIf="!next;else design"> 
+          <form
+            #customStylesForm="ngForm"
+            (ngSubmit)="onSubmit()"
+            [validated]="customStylesValidated"
+            cForm
+            class="row g-3 needs-validation"
+          >
+            <c-col md="6">
+              <label cLabel for="validationCustom01">Title</label>
+              <input
+                cFormControl
+                id="validationCustom01"
+                required
+                type="text"
+                value="Title"
+              />
+              <c-form-feedback [valid]="true">Looks good!</c-form-feedback>
+            </c-col>
+            <c-col md="6">
+              <label cLabel for="validationCustom02">Tagline</label>
+              <input
+                cFormControl
+                id="validationCustom02"
+                required
+                type="text"
+                value="Tagline"
+              />
+              <c-form-feedback [valid]="true">Looks good!</c-form-feedback>
+            </c-col>
+  
+            <hr class="mt-5" />
+            <label>Modules</label>
+            <c-col xs="12">
+              <table [striped]="true" cTable>
+                <thead>
+                  <tr>
+                    <th scope="col">Add/Remove</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Module</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let module of appModules; let i = index">
+                    <td class="pt-3">
+                      <a (click)="setModule('remove', i)" class="mr-2">
+                        <svg
+                          cIcon
+                          name="cilX"
+                          class="text-danger m-r-1"
+                          size="lg"
+                        ></svg>
+                      </a>
+                      <a (click)="setModule('add', i)">
+                        <svg
+                          cIcon
+                          name="cilPlus"
+                          class="text-success"
+                          size="lg"
+                        ></svg>
+                      </a>
+                    </td>
+                    <td >
+                      <input
+                        cFormControl
+                        id="value"
+                        [(ngModel)]="module.title"
+                        name="value+{{ i }}"
+                      />
+                    </td>
+                    <td>
+                      <select
+                        cSelect
+                        id="inputState"
+                        [(ngModel)]="module.module"
+                        [name]="'module' + i"
+                      >
+                      <option *ngFor="let option of modules" [value]="option.id">
+                        {{option.title}}
+                      </option>
+  
+                      </select>
+                    </td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+            </c-col>
+          </form>
+        </ng-container>
+        <c-col xs="12" class="mt-2">
+          <button
+            (click)="cancel()"
+            cButton
+            color="secondary"
+            type="reset"
+            class="float-end"
+          >
+            Cancel
+          </button>
+          <button
+            cButton
+            class="me-1 float-end"
+            color="primary"
+           (click)="navigate()"
+          >
+            Next
+          </button>
+
+          
+        </c-col>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row> -->
+
+
+<app-app-designer></app-app-designer>

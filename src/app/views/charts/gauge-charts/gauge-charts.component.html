@@ -1,0 +1,50 @@
+<c-row>
+  <c-col xs="12"></c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Bar Chart
+      </c-card-header>
+      <c-card-body>
+        <apx-chart id="chart"
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [plotOptions]="chartOptions.plotOptions"
+          [labels]="chartOptions.labels"
+        ></apx-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Bar Chart
+      </c-card-header>
+      <c-card-body>
+        <apx-chart
+          [series]="chartOptions2.series"
+          [chart]="chartOptions2.chart"
+          [plotOptions]="chartOptions2.plotOptions"
+          [labels]="chartOptions2.labels"
+          [stroke]="chartOptions2.stroke"
+          [fill]="chartOptions2.fill"
+        ></apx-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Bar Chart
+      </c-card-header>
+      <apx-chart
+        [series]="chartOptions3.series"
+        [chart]="chartOptions3.chart"
+        [plotOptions]="chartOptions3.plotOptions"
+        [labels]="chartOptions3.labels"
+        [fill]="chartOptions3.fill"
+        [stroke]="chartOptions3.stroke"
+      ></apx-chart>
+    </c-card>
+  </c-col>
+</c-row>

@@ -1,0 +1,42 @@
+
+<div class="example-boundary" cdkDropList (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let widget of widgets" cdkDrag>
+    <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+    {{widget}}
+  </div>
+</div>
+<button (click)="addWidget()" cButton color="primary" type="reset" class="float-end mt-10">
+  Add Widget
+</button>
+
+
+<c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle> Add Widget</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <c-dropdown direction="center">
+      <button cButton cDropdownToggle color="secondary">Centered dropdown</button>
+      <ul cDropdownMenu>
+        <li><button cDropdownItem>Action one</button></li>
+        <li><button cDropdownItem>Action two</button></li>
+        <li><button cDropdownItem>Action three</button></li>
+      </ul>
+    </c-dropdown>
+    <c-dropdown direction="center">
+      <button cButton cDropdownToggle color="secondary">Centered dropdown</button>
+      <ul cDropdownMenu>
+        <li><button cDropdownItem>Action one</button></li>
+        <li><button cDropdownItem>Action two</button></li>
+        <li><button cDropdownItem>Action three</button></li>
+      </ul>
+    </c-dropdown>
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleLiveDemo()" cButton color="secondary">
+      Close
+    </button>
+    <button cButton color="primary">Save changes</button>
+  </c-modal-footer>
+</c-modal>

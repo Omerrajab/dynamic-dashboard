@@ -1,0 +1,32 @@
+<c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <c-row>
+          <c-col> <strong>Add</strong>
+            <small>Table Meta</small></c-col>
+          
+        </c-row>
+  
+      </c-card-header>
+      <c-card-body>
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" id="title" name="title" class="form-control" [(ngModel)]="formData.title" required>
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id="description" name="description" class="form-control" [(ngModel)]="formData.description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="key">Key</label>
+              <input type="text" id="key" name="key" class="form-control" [(ngModel)]="formData.key" required>
+            </div>
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button  class="btn btn-danger" (click)="onCancel()">Cancel </button>
+              </div>
+          </form>
+      </c-card-body>
+    </c-card>
+  </c-col>

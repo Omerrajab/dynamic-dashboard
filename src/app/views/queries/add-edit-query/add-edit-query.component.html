@@ -1,0 +1,195 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header ngPreserveWhitespaces>
+      <c-row>
+        <c-col> <strong>Add</strong>
+          <small>Query</small></c-col>
+        <c-col>
+          <c-form-check [switch]="true" class="float-end">
+            <input cFormCheckInput checked type="checkbox" id="customQuery" name="customQuery"
+              [(ngModel)]="customQuery" />
+            <label cFormCheckLabel>Custom Query</label>
+          </c-form-check></c-col>
+      </c-row>
+
+    </c-card-header>
+    <c-card-body>
+      <div *ngIf="customQuery;else selectableQuery">
+        <c-row>
+          <c-col md="3">
+            <c-card class="h-100 mh-560">
+
+              <c-card-body>
+
+                <c-input-group class="flex-nowrap">
+                  <input aria-label="sm input example" cFormControl placeholder="Search Schema..." sizing="sm"
+                    type="text" id="searchText" name="search" [(ngModel)]="searchText">
+                  <button cButton color="secondary" size="sm" class="float-end" (click)="resetSearch()">
+                    <svg [cIcon]="icons.cilReload" size="xl" title="List Icon"></svg>
+
+                  </button>
+
+                </c-input-group>
+                <c-accordion class="mt-2">
+                  <c-accordion-item #item0="cAccordionItem" [visible]="false">
+                    <ng-template cTemplateId="accordionHeaderTemplate">
+                      <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
+                        Schema #0
+                      </button>
+                    </ng-template>
+                    <ng-template cTemplateId="accordionBodyTemplate">
+                      <div class="accordion-body">
+                        <strong>This is the first item's accordion body.</strong> It is hidden by default,
+                        until the collapse plugin adds the appropriate classes that we use to style each
+                        element. These classes control the overall appearance, as well as the showing and
+                        hiding via CSS transitions. You can modify any of this with custom CSS or overriding
+                        our default variables. It's also worth noting that just about any HTML can go within
+                        the <code>.accordion-body</code>, though the transition does limit overflow.
+                      </div>
+                    </ng-template>
+                  </c-accordion-item>
+                  <c-accordion-item #item1="cAccordionItem" [visible]="false">
+                    <ng-template cTemplateId="accordionHeaderTemplate">
+                      <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
+                        Schema #1
+                      </button>
+                    </ng-template>
+                    <ng-template cTemplateId="accordionBodyTemplate">
+                      <div class="accordion-body">
+                        <strong>This is the second item's accordion body.</strong> It is hidden by default,
+                        until the collapse plugin adds the appropriate classes that we use to style each
+                        element. These classes control the overall appearance, as well as the showing and
+                        hiding via CSS transitions. You can modify any of this with custom CSS or overriding
+                        our default variables. It's also worth noting that just about any HTML can go within
+                        the <code>.accordion-body</code>, though the transition does limit overflow.
+                      </div>
+                    </ng-template>
+                  </c-accordion-item>
+                  <c-accordion-item #item2="cAccordionItem" [visible]="false">
+                    <ng-template cTemplateId="accordionHeaderTemplate">
+                      <button (click)="item2.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
+                        Schema #2
+                      </button>
+                    </ng-template>
+                    <ng-template cTemplateId="accordionBodyTemplate">
+                      <div class="accordion-body">
+                        <strong>This is the third item's accordion body.</strong> It is hidden by default,
+                        until the collapse plugin adds the appropriate classes that we use to style each
+                        element. These classes control the overall appearance, as well as the showing and
+                        hiding via CSS transitions. You can modify any of this with custom CSS or overriding
+                        our default variables. It's also worth noting that just about any HTML can go within
+                        the <code>.accordion-body</code>, though the transition does limit overflow.
+                      </div>
+                    </ng-template>
+                  </c-accordion-item>
+                </c-accordion>
+
+
+              </c-card-body>
+            </c-card>
+          </c-col>
+          <c-col md="9">
+            <c-row class="h-50">
+              <c-card>
+                <c-card-body>
+                  <textarea class="form-control textarea-full-width query-editor" rows="4"></textarea>
+
+                  <button (click)="executeQuery()" cButton color="primary" type="reset" class="float-end ml-2 mt-2 ml-2"
+                    size="sm">
+                    <svg [cIcon]="icons.cilMediaPlay" size="sm" title="List Icon"></svg>
+                    Execute
+                  </button>
+                  <button (click)="saveQuery()" cButton color="secondary" type="reset" class="float-end mt-2 mr-2"
+                    size="sm">
+                    <svg [cIcon]="icons.cilSave" size="sm" title="List Icon"></svg>
+                    Save
+                  </button>
+
+                </c-card-body>
+              </c-card>
+            </c-row>
+            <hr />
+            <div [ngTemplateOutlet]="visualization"></div>
+          </c-col>
+        </c-row>
+      </div>
+    </c-card-body>
+  </c-card>
+</c-col>
+
+
+<ng-template #selectableQuery>
+  <app-add-edit-selectable-query></app-add-edit-selectable-query>
+  <div [ngTemplateOutlet]="visualization"></div>
+</ng-template>
+
+<c-modal id="addVisualizationModal" size="xl" [visible]="visible" (visibleChange)="handleModalChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Visualization Editor</h5>
+    <button (click)="closeModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <c-row>
+      <c-col>
+        <app-add-edit-visualization (onSelect)="onVisualizationSelect($event)"></app-add-edit-visualization>
+      </c-col>
+
+      <c-col>
+        <app-visualization-preview *ngIf="activeVisualization?.type" [type]="activeVisualization.type"></app-visualization-preview>
+      </c-col>
+    </c-row>
+
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="primary" class="mr-2">Save</button>
+    <button (click)="closeModal()" cButton color="secondary">
+      Cancel
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<ng-template #visualization>
+  <c-row class="h-50 mh-scroll">
+    <c-card>
+      <c-card-body>
+        <c-nav variant="tabs">
+          <c-nav-item [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0"
+            cNavLink>Table</c-nav-item>
+
+          <c-nav-item *ngFor="let nav of tabs; index as i">
+            <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1+i" cNavLink>
+              {{nav.title}}
+            </a>
+          </c-nav-item>
+          <c-nav-item [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="tabs.length+1" cNavLink (click)="addTab()">
+            <svg cIcon name="cilPlus" class="text-success" size="lg"></svg>
+            Visualization
+          </c-nav-item>
+        </c-nav>
+        <c-tab-content #tabContent="cTabContent" [activeTabPaneIdx]="activeTabIndex">
+          <c-tab-pane class="p-3">
+            <table stripedColumns cTable bordered>
+              <thead>
+                <tr>
+                  <th *ngFor="let header of tableHeaders">{{ header }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of queryData">
+                  <td *ngFor="let cell of row | keyvalue">{{ cell.value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </c-tab-pane>
+          <c-tab-pane *ngFor="let pane of tabs; index as i;" class="p-3">
+            This is some placeholder content the <strong>{{pane.title}}</strong> tab's associated content. Clicking
+            another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
+            control the content visibility and styling. You can use it with tabs, pills, and any other .nav-powered
+            navigation.
+          </c-tab-pane>
+          <c-tab-pane class="p-3"></c-tab-pane>
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+  </c-row>
+</ng-template>

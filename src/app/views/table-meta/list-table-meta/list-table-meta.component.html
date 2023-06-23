@@ -1,0 +1,35 @@
+
+<c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Table Meta</strong>
+        <small> List</small>
+        <button cButton color="primary" size="sm" class="float-end" routerLink="add">Add Table Meta</button>
+      </c-card-header>
+      <c-card-body>
+       
+        <table [striped]="true" cTable>
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Last modified by</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of tableData">
+                <td>{{row?.name}}</td>
+                <td>{{row?.updatedOn}}</td>
+                <td>
+                  <i class="fa fa-trash"></i>
+                </td>
+              </tr>
+             
+            </tbody>
+          </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  
+ 
+  

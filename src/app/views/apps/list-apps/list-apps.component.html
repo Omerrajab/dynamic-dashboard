@@ -1,0 +1,38 @@
+<c-card class="mb-4">
+  <c-card-header>
+    <strong>Dashboards</strong>
+    <button
+      cButton
+      color="primary"
+      size="sm"
+      class="float-end"
+      routerLink="add"
+    >
+      Add Dashboard
+    </button>
+  </c-card-header>
+  <c-card-body>
+    <c-row>
+      <c-col *ngFor="let item of colors; index as i" [lg]="4">
+        <c-card
+          [color]="item.color"
+          [textColor]="
+            item.color === 'warning' || item.color === 'light' ? '' : 'white'
+          "
+          class="mb-3"
+        >
+          <c-card-header>AppHeader</c-card-header>
+          <c-card-body class="bg-gradient">
+            <h5 cCardTitle>{{ item.color }} card title</h5>
+            <p cCardText>
+              Some basic description about app.
+            </p>
+            <button [color]="item.color" cButton class="shadow float-end">
+              Details
+            </button>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-card-body>
+</c-card>

@@ -1,0 +1,21 @@
+.cbody  {
+    width: 100%;
+    height: auto;
+  }
+  
+  .cbody .btns {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+ 
+    color: white;
+    font-size: 16px;
+   
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+  }
+  

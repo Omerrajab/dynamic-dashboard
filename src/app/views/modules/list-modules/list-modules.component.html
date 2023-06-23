@@ -1,0 +1,76 @@
+<c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Modules</strong>
+        <small> List</small>
+        <button cButton color="primary" size="sm" class="float-end" routerLink="add">Add Query</button>
+      </c-card-header>
+      <c-card-body>
+        <!-- <p class="text-medium-emphasis small">
+          Border styles, active styles, and table variants are not inherited by
+          nested tables.
+        </p> -->
+        <c-nav variant="pills">
+          <c-nav-item>
+            <a
+              [active]="true"
+              [cTabContent]="tabContent"
+              [routerLink]
+              [tabPaneIdx]="0"
+              cNavLink
+            >
+            Favorites
+            </a>
+          </c-nav-item>
+          <c-nav-item>
+            <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>
+              All
+            </a>
+          </c-nav-item>
+        </c-nav>
+      
+        <c-tab-content #tabContent="cTabContent" [activeTabPaneIdx]="1">
+          <c-tab-pane class="p-3">
+            <ng-container
+              [ngTemplateOutlet]="table"
+              [ngTemplateOutletContext]="{ fav: true }"
+            ></ng-container>
+          </c-tab-pane>
+          <c-tab-pane class="p-3">
+              <ng-container
+              [ngTemplateOutlet]="table"
+              [ngTemplateOutletContext]="{ fav: false }"
+            ></ng-container>
+          </c-tab-pane>
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  
+  <ng-template #table  let-fav='fav'>
+      <div>{{fav}}</div>
+    <table [striped]="true" cTable>
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Last modified by</th>
+          <th scope="col"  class="float-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>
+              <svg cIcon name="cil-options" size="sm" title="Numbered List Icon" class="float-end" ></svg>
+              <ng-template #tooltipContent>
+                  Vivamus <span cTextColor="success">sagittis</span> lacus vel augue laoreet
+                  rutrum <i cTextColor="warning">faucibus</i>.
+                </ng-template>
+          </td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </ng-template>
+  

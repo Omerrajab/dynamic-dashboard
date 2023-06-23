@@ -1,0 +1,108 @@
+<!-- <pre class="text-center">{{ data | json }}</pre> -->
+<c-row>
+  <ng-container *ngFor="let item of data; let i = index">
+    <c-col xs="12" lg="6">
+      <c-card class="mb-4">
+        <c-card-header>
+          <c-input-group class="mb-3">
+            <input
+              aria-describedby="basic-addon2"
+              cFormControl
+              placeholder="{{ item.type }} title"
+              [(ngModel)]="item.title"
+              [name]="item.name + i"
+              [disabled]="!item.editTitle"
+              (blur)="item.editTitle = false"
+            />
+            <button
+              cButton
+              cInputGroupText
+              color="secondary"
+              (click)="item.editTitle = true"
+            >
+              <svg cIcon name="cil-pencil"></svg>
+            </button>
+          </c-input-group>
+        </c-card-header>
+        <c-card-body class="cbody">
+          <c-button-group aria-label="Basic example" role="group" class="btns">
+            <button
+              cButton
+              color="primary"
+              title="Edit"
+              (click)="editItem(item)"
+              [cModalToggle]="'editItem'"
+            >
+              <svg cIcon name="cil-pencil"></svg>
+            </button>
+            <button cButton color="danger" title="Delete">
+              <svg cIcon name="cil-delete"></svg>
+            </button>
+            <button
+              cButton
+              color="success"
+              title="Copy"
+              (click)="copyItem(item)"
+            >
+              <svg cIcon name="cil-copy"></svg>
+            </button>
+          </c-button-group>
+          <ng-container
+            [ngTemplateOutlet]="cardBody"
+            [ngTemplateOutletContext]="{ item: item }"
+          ></ng-container>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </ng-container>
+</c-row>
+
+<ng-template #cardBody let-item="item">
+  <container-element [ngSwitch]="item.type">
+    <ng-container *ngSwitchCase="'widget'"></ng-container>
+    <ng-container *ngSwitchCase="'chart'">
+      <ng-container [ngSwitch]="item.name">
+        <ng-container *ngSwitchCase="'barchart'">
+          <app-bar-chart></app-bar-chart>
+        </ng-container>
+        <ng-container *ngSwitchCase="'linechart'">
+          <app-line-chart></app-line-chart>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'guage'">guage chui</ng-container>
+  </container-element>
+</ng-template>
+<c-modal id="editItem" alignment="center" size="xl">
+  <c-modal-header>
+    <h5 cModalTitle>{{selectedItem.title ||'Chart'}}</h5>
+    <!-- <button [cModalToggle]="'chartModal'" cButtonClose></button> -->
+  </c-modal-header>
+  <c-modal-body>
+    <c-row>
+      <c-col xs="12" md="6" lg="6">
+        <ng-container
+          [ngTemplateOutlet]="cardBody"
+          [ngTemplateOutletContext]="{ item: selectedItem }"
+        ></ng-container>
+      </c-col>
+      <c-col xs="12" md="6" lg="6"> 
+        <label cLabel for="dataControl">Data</label>
+        <select aria-label="Default select example" cSelect  id="dataControl">
+            <option>Select Query</option>
+            <option value="1">Query One</option>
+            <option value="2">Query Two</option>
+            <option value="3">Query Three</option>
+          </select>
+      </c-col>
+    </c-row>
+  </c-modal-body>
+  <c-modal-footer>
+    <button [cModalToggle]="'editItem'" cButton color="secondary">
+      Close
+    </button>
+    <button cButton color="primary" [cModalToggle]="'editItem'">
+      Select
+    </button>
+  </c-modal-footer>
+</c-modal>

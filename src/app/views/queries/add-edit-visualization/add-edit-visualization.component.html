@@ -1,0 +1,131 @@
+<form (ngSubmit)="onSubmit()">
+    <div>
+        <label cLabel for="visualizationType">Visualization Type:</label>
+        <select cSelect id="visualizationType" [(ngModel)]="visualization.type" name="visualizationType" required
+            (change)="onVisualizationSelect($event)">
+            <option value="undefined">Select an option</option>
+            <option value="barChart">Bar Chart</option>
+            <option value="pieChart">Pie Chart</option>
+            <option value="lineChart">Line Chart</option>
+        </select>
+
+    </div>
+    <div>
+        <label cLabel for="visualizationName">Visualization Name:</label>
+        <input cFormControl type="text" id="visualizationName" [(ngModel)]="visualization.name" name="visualizationName"
+            required>
+    </div>
+    <div style="margin-top:10px">
+        <c-nav variant="tabs">
+            <c-nav-item>
+                <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>
+                    General
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>
+                    X Axis
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="2" cNavLink>
+                    Y Axis
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="3" cNavLink>
+                    Series
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="4" cNavLink>
+                    Colors
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="5" cNavLink>
+                    Data Labels
+                </a>
+            </c-nav-item>
+        </c-nav>
+        <c-tab-content #tabContent="cTabContent" [activeTabPaneIdx]="1">
+            <c-tab-pane class="p-3">
+                <div>
+                    <label cLabel for="visualizationType">chart Type:</label>
+                    <select cSelect id="visualizationType" [(ngModel)]="visualization.type" name="visualizationType"
+                        required>
+                        <option value="undefined">Select an option</option>
+                        <option value="barChart">Bar Chart</option>
+                        <option value="pieChart">Pie Chart</option>
+                        <option value="lineChart">Line Chart</option>
+                    </select>
+
+                </div>
+                <div>
+                    <label cLabel for="visualizationType">X Column:</label>
+                    <select cSelect id="xcolumn" [(ngModel)]="visualization.xcolumn" name="xcolumn" required>
+                        <option value="barChart">Power Consumption</option>
+                        <option value="barChart">Fuel Consumption</option>
+                        <option value="barChart">Production</option>
+                        <option value="barChart">Gas Emission</option>
+                    </select>
+
+                </div>
+                <div>
+                    <label cLabel for="visualizationType">Y Columns:</label>
+                    <app-multi-select></app-multi-select>
+
+                </div>
+            </c-tab-pane>
+            <c-tab-pane class="p-3">
+                This is some placeholder content the <strong>Profile</strong> tab's associated content. Clicking another
+                tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the
+                content visibility and styling. You can use it with tabs, pills, and any other .nav-powered navigation.
+            </c-tab-pane>
+            <!-- example: *ngIf activeTabPaneIdx === 0 disables third cNavLink -->
+            <c-tab-pane *ngIf="tabContent.activeTabPaneIdx > 0" class="p-3">
+                This is some placeholder content the <strong>Contact</strong> tab's associated content. Clicking another
+                tab will
+                toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content
+                visibility
+                and styling. You can use it with tabs, pills, and any other .nav-powered navigation.
+            </c-tab-pane>
+            <c-tab-pane *ngIf="tabContent.activeTabPaneIdx > 0" class="p-3">
+                This is some placeholder content the <strong>Contact</strong> tab's associated content. Clicking another
+                tab will
+                toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content
+                visibility
+                and styling. You can use it with tabs, pills, and any other .nav-powered navigation.
+            </c-tab-pane>
+            <c-tab-pane *ngIf="tabContent.activeTabPaneIdx > 0" class="p-3">
+                This is some placeholder content the <strong>Contact</strong> tab's associated content. Clicking another
+                tab will
+                toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content
+                visibility
+                and styling. You can use it with tabs, pills, and any other .nav-powered navigation.
+            </c-tab-pane>
+            <c-tab-pane *ngIf="tabContent.activeTabPaneIdx > 0" class="p-3">
+                This is some placeholder content the <strong>Contact</strong> tab's associated content. Clicking another
+                tab will
+                toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content
+                visibility
+                and styling. You can use it with tabs, pills, and any other .nav-powered navigation.
+            </c-tab-pane>
+        </c-tab-content>
+    </div>
+</form>
+
+<!-- <form cForm>
+    <div class="mb-3">
+      <label cLabel for="exampleFormControlInput1">Email address</label>
+      <input cFormControl
+             id="exampleFormControlInput1"
+             placeholder="name@example.com"
+             type="email"
+      />
+    </div>
+    <div class="mb-3">
+      <label cLabel for="exampleFormControlTextarea1">Example textarea</label>
+      <textarea cFormControl id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+  </form> -->
